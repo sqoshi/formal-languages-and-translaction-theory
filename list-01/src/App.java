@@ -1,12 +1,18 @@
 
 public class App {
     public static void main(String[] args) {
-        char[] pat = "AABAACAADAABAAABAA".toCharArray();
-        System.out.println(pat.length);
-        for (int i = 0; i < pat.length; i++) {
-            System.out.println(i + " : " + pat[i]);
+        char[] pat = "AABA".toCharArray();
+        char[] txt = "AABAACAADAABAAABAA".toCharArray();
+
+
+        for (int i = 0; i < txt.length; i++) {
+            System.out.print("[" + i + ":" + txt[i] + "] ");
+            if (i != 0 && i % 10 == 0) {
+                System.out.println();
+            }
         }
-        char[] txt = "AABA".toCharArray();
-        Automat.search(txt, pat);
+
+        System.out.println();
+        Automat.search(pat, txt);
     }
 }

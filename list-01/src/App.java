@@ -1,10 +1,12 @@
-import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        System.out.println("podaj text");
-        Scanner scanner = new Scanner(System.in);
-        String T = scanner.next();
-        new Automat(T,function,)
+        char[] pat = "AABAACAADAABAAABAA".toCharArray();
+        System.out.println(pat.length);
+        for (int i = 0; i < pat.length; i++) {
+            System.out.println(i + " : " + pat[i]);
+        }
+        char[] txt = "AABA".toCharArray();
+        Automat.search(txt, pat);
     }
 }

@@ -12,7 +12,5 @@ public class App {
             }
         }
 
-        System.out.println();
-        Automat.search(pat, txt);
     }
 }

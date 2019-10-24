@@ -3,8 +3,6 @@ import java.util.*;
 
 public class Automatic {
 
-    private static final String ANSI_PURPLE = "\u001B[35m";
-    private static final String ANSI_RESET = "\u001B[0m";
 
     private String pattern;
     private String text;
@@ -41,6 +39,7 @@ public class Automatic {
             return;
         }
         System.out.println("Pattern: " + pattern);
+        System.out.println(pattern.length());
         System.out.println("Text: " + text);
         System.out.println("Alphabet: " + alphabet);
     }
@@ -50,9 +49,8 @@ public class Automatic {
         String pq;
         int k;
         char a;
-
-        for(int q = 0; q <= patternLength; q++) {
-            for(int i = 0; i < alphabetLength; i++) {
+        for (int q = 0; q <= patternLength; q++) {
+            for (int i = 0; i < alphabetLength; i++) {
                 a = alphabet.charAt(i);
                 k = Math.min(patternLength + 1, q + 2);
                 pq = pattern.substring(0, q) + a;
@@ -67,34 +65,43 @@ public class Automatic {
 
     private void search() {
         int q = 0;
-        for(int i = 0; i < textLength; i++) {
+        for (int i = 0; i < textLength; i++) {
             q = deltaFunc(q, text.charAt(i));
-            if(q == patternLength) solutions.add(i - patternLength + 1);
+            if (q == patternLength)
+                solutions.add(i - patternLength + 1);
         }
     }
 
     private int deltaFunc(int q, char c) {
-        for(int i = 0; i < alphabetLength; i++)
-            if(c == alphabet.charAt(i)) return transitions[q][i];
+        for (int i = 0; i < alphabetLength; i++)
+            if (c == alphabet.charAt(i))
+                return transitions[q][i];
         System.out.println("Character not from the alphabet: " + c);
         return 0;
     }
 
     private void printTransitionTable() {
+        System.out.println();
         System.out.println("Transition table: ");
-        for(int i = 0; i <= patternLength; i++) {
-            for(int j = 0; j < alphabetLength; j++)
+        for (int i = 0; i < alphabetLength; i++) {
+            System.out.print(alphabet.charAt(i) + " ");
+        }
+        System.out.println();
+        for (int i = 0; i <= patternLength; i++) {
+            for (int j = 0; j < alphabetLength; j++) {
                 System.out.print(transitions[i][j] + " ");
+            }
             System.out.println();
         }
     }
 
     private void printSolutions() {
-        System.out.println("\nSolutions: " + solutions);
         System.out.println();
-        for(int i : solutions) {
-            for(int c = 0; c < textLength; c++) {
-                if(c >= i && c < (i + patternLength))
+        System.out.println("Solutions: " + solutions);
+        System.out.println();
+        for (int i : solutions) {
+            for (int c = 0; c < textLength; c++) {
+                if (c >= i && c < (i + patternLength))
                     System.out.print("\u001B[35m");
                 System.out.print(text.charAt(c) + "\u001B[0m");
             }

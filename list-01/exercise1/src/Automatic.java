@@ -2,8 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class Automatic {
+
     private static final String ANSI_PURPLE = "\u001B[35m";
     private static final String ANSI_RESET = "\u001B[0m";
+
     private String pattern;
     private String text;
     private String alphabet;
@@ -14,8 +16,8 @@ public class Automatic {
     private ArrayList<Integer> solutions;
 
 
-    private Automatic(String[] args) {
-        readDataFromFiles(args);
+    Automatic() {
+        readDataFromFiles();
         textLength = text.length();
         patternLength = pattern.length();
         alphabetLength = alphabet.length();
@@ -28,15 +30,11 @@ public class Automatic {
         printSolutions();
     }
 
-    private void readDataFromFiles(String args[]) {
+    private void readDataFromFiles() {
         try {
-            System.out.println("How many args: " + args.length);
-            pattern = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/pattern")).next();
-            text = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/text")).next();
-            if(args.length == 2)
-                alphabet = findAlphabet();
-            else
-                alphabet = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/alphabet")).next();
+            pattern = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/pattern")).next();
+            text = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/text")).next();
+            alphabet = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/alphabet")).next();
             System.out.println("Files read correctly");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -47,13 +45,6 @@ public class Automatic {
         System.out.println("Alphabet: " + alphabet);
     }
 
-    private String findAlphabet() {
-        Set<Character> set = new LinkedHashSet<>();
-        for(char c: text.toCharArray())
-            set.add(c);
-
-        return set.toString().replaceAll("\\[|]","").replaceAll(",","").replaceAll(" ", "");
-    }
 
     private void computeTransitionFunction() {
         String pq;
@@ -82,11 +73,10 @@ public class Automatic {
         }
     }
 
-    //deltaFunc -> max length of pattern prefix
     private int deltaFunc(int q, char c) {
         for(int i = 0; i < alphabetLength; i++)
             if(c == alphabet.charAt(i)) return transitions[q][i];
-        System.out.println("Character not from the alphabet");
+        System.out.println("Character not from the alphabet: " + c);
         return 0;
     }
 
@@ -112,7 +102,4 @@ public class Automatic {
         }
     }
 
-    public static void main(String args[]) {
-        new Automatic(args);
-    }
 }

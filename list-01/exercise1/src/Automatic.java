@@ -17,7 +17,7 @@ public class Automatic {
 
 
     Automatic() {
-        readDataFromFiles();
+        readData();
         textLength = text.length();
         patternLength = pattern.length();
         alphabetLength = alphabet.length();
@@ -30,11 +30,11 @@ public class Automatic {
         printSolutions();
     }
 
-    private void readDataFromFiles() {
+    private void readData() {
         try {
-            pattern = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/pattern")).next();
-            text = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/text")).next();
-            alphabet = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/src/data/alphabet")).next();
+            pattern = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/exercise1/src/data/pattern")).next();
+            text = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/exercise1/src/data/text")).next();
+            alphabet = new Scanner(new FileReader("/home/piotr/Documents/formal-languages-and-translaction-theory/list-01/exercise1/src/data/alphabet")).next();
             System.out.println("Files read correctly");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -95,8 +95,8 @@ public class Automatic {
         for(int i : solutions) {
             for(int c = 0; c < textLength; c++) {
                 if(c >= i && c < (i + patternLength))
-                    System.out.print(ANSI_PURPLE);
-                System.out.print(text.charAt(c) + ANSI_RESET);
+                    System.out.print("\u001B[35m");
+                System.out.print(text.charAt(c) + "\u001B[0m");
             }
             System.out.println();
         }

@@ -19,6 +19,22 @@ class KMP {
         patternLength = pattern.length();
         solutions = new ArrayList<>();
         System.out.println(Arrays.toString(computePrefix(pattern)));
+        matcher(text, pattern);
+        printSolutions();
+    }
+
+    private void printSolutions() {
+        System.out.println();
+        System.out.println("Solutions: " + solutions);
+        System.out.println();
+        for (int i : solutions) {
+            for (int c = 0; c < textLength; c++) {
+                if (c >= i && c < (i + patternLength))
+                    System.out.print("\u001B[35m");
+                System.out.print(text.charAt(c) + "\u001B[0m");
+            }
+            System.out.println();
+        }
     }
 
     private void readData() {
@@ -36,26 +52,38 @@ class KMP {
     }
 
     private int[] computePrefix(String pattern) {
-        int i=1,j=0;
+        int i = 1, k = 0;
         int[] p = new int[pattern.length()];
+
         while (i < pattern.length()) {
-
-            while (pattern.charAt(i) != pattern.charAt(j) && j > 0) {
-                j = p[j - 1];
-
+            while (pattern.charAt(i) != pattern.charAt(k) && k > 0) {
+                k = p[k - 1];
             }
-            if (pattern.charAt(i) == pattern.charAt(j)) {
-                p[i] = j + 1;
+            if (pattern.charAt(i) == pattern.charAt(k)) {
+                p[i] = k + 1;
                 i++;
-                j++;
-
+                k++;
             } else {
-                p[i] = j;
+                p[i] = k;
                 i++;
             }
         }
-
         return p;
     }
 
+    private void matcher(String text, String pattern) {
+        pi = computePrefix(pattern);
+        int i = 0;
+        int q = 0;
+
+        while (i < text.length()) {
+            while (q > 0 && pattern.charAt(q) != text.charAt(i)) q = pi[q - 1];
+            if (pattern.charAt(q) == text.charAt(i)) q++;
+            if (q == pattern.length()) {
+                solutions.add((i - pattern.length() + 1));
+                q = pi[q - 1];
+            }
+            i++;
+        }
+    }
 }

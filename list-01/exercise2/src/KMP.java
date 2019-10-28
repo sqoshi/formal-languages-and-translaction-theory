@@ -7,16 +7,10 @@ import java.util.Scanner;
 class KMP {
     private String pattern;
     private String text;
-    private String alphabet;
-    private int patternLength;
-    private int textLength;
-    private int[] pi;
     private ArrayList<Integer> solutions;
 
     KMP() {
         readData();
-        textLength = text.length();
-        patternLength = pattern.length();
         solutions = new ArrayList<>();
         System.out.println(Arrays.toString(computePrefix(pattern)));
         matcher(text, pattern);
@@ -28,8 +22,8 @@ class KMP {
         System.out.println("Solutions: " + solutions);
         System.out.println();
         for (int i : solutions) {
-            for (int c = 0; c < textLength; c++) {
-                if (c >= i && c < (i + patternLength))
+            for (int c = 0; c < text.length(); c++) {
+                if (c >= i && c < (i + pattern.length()))
                     System.out.print("\u001B[35m");
                 System.out.print(text.charAt(c) + "\u001B[0m");
             }
@@ -47,10 +41,23 @@ class KMP {
             return;
         }
         System.out.println("Pattern: " + pattern);
-        System.out.println(pattern.length());
         System.out.println("Text: " + text);
     }
+    private void matcher(String text, String pattern) {
+        int[] pi = computePrefix(pattern);
+        int i = 0;
+        int q = 0;
 
+        while (i < text.length()) {
+            while (q > 0 && pattern.charAt(q) != text.charAt(i)) q = pi[q - 1];
+            if (pattern.charAt(q) == text.charAt(i)) q++;
+            if (q == pattern.length()) {
+                solutions.add((i - pattern.length() + 1));
+                q = pi[q - 1];
+            }
+            i++;
+        }
+    }
     private int[] computePrefix(String pattern) {
         int i = 1, k = 0;
         int[] p = new int[pattern.length()];
@@ -71,19 +78,5 @@ class KMP {
         return p;
     }
 
-    private void matcher(String text, String pattern) {
-        pi = computePrefix(pattern);
-        int i = 0;
-        int q = 0;
 
-        while (i < text.length()) {
-            while (q > 0 && pattern.charAt(q) != text.charAt(i)) q = pi[q - 1];
-            if (pattern.charAt(q) == text.charAt(i)) q++;
-            if (q == pattern.length()) {
-                solutions.add((i - pattern.length() + 1));
-                q = pi[q - 1];
-            }
-            i++;
-        }
-    }
 }

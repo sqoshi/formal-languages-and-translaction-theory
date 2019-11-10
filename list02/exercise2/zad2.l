@@ -6,9 +6,10 @@ int yylex();
 %}
 start \<\!\-\-
 end  \-\-\>
-mid \-\-
+mid \-
 %%
 {start}[^\-\-]*{end} ;
+{start}[^\-]*[\-]{1}[^\-]*{end} ;
 %%
 
 

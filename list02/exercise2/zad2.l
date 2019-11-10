@@ -1,23 +1,36 @@
 %{
 #include <stdio.h>
-#include <string.h>
-int yywrap();
-int yylex();
-%}
-start \<\!\-\-
-end  \-\-\>
-mid \-
-%%
-{start}[^\-\-]*{end} ;
-{start}[^\-]+[\-]{1}[^\-]+{end} ;
-%%
 
+int yylex();
+int yywrap();
+%}
+
+%x TAG
+%x DOIT
+
+%%
+\<!--   BEGIN(DOIT);
+        <DOIT>{
+            .|\n                 ;
+            \<[^\-]*\>           {printf("%s",yytext);}
+            \-\-\>               {BEGIN(INITIAL);}
+        }
+\<!--.*[\-]{2}.*--\> {printf("%s\n",yytext);}
+
+\<      {ECHO; BEGIN(TAG);}
+        <TAG>{
+            ([::blank::]).*		ECHO;
+            .                   ECHO;
+            \n                  ECHO;
+            .>                  {ECHO; BEGIN(INITIAL);}
+        }
+
+%%
 
 int yywrap() {
-  return 1;
+    return 1;
 }
 
 int main() {
-  yylex();
-  return 0;
+    return yylex();
 }

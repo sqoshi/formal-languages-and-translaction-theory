@@ -19,6 +19,7 @@ MUL_COM_START       [ \t]*"/*"
 %x ONE_DOC_COM
 %x ONE_COM
 %x MUL_COM
+%x TRY
 %%
 {STRING_START} {
     printf("%s", yytext);
@@ -45,6 +46,8 @@ MUL_COM_START       [ \t]*"/*"
     if(DOCS) { printf("%s", yytext); }
 }
 <MUL_DOC_COM>{
+    "//".*\n        if(DOCS) { printf("%s", yytext); }
+
     "/"         {
                     BEGIN(0);
                     if(DOCS) { printf("%s", yytext); }
@@ -82,6 +85,12 @@ MUL_COM_START       [ \t]*"/*"
 
 "/*!".*"*/"   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
 "//!".*   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
+"//!".*\\\n.*\\\n   {
+     if(DOCS) {printf("%s", yytext);}
+     };BEGIN(TRY);
+<TRY>{
+    .*\\\n ;BEGIN(0);
+}
 {MUL_COM_START} {
     BEGIN(MUL_COM);
 }

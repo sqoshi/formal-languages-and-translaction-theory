@@ -45,6 +45,10 @@ MUL_COM_START       [ \t]*"/*"
     if(DOCS) { printf("%s", yytext); }
 }
 <MUL_DOC_COM>{
+    "/"         {
+                    BEGIN(0);
+                    if(DOCS) { printf("%s", yytext); }
+                 };
     "*/"[ \t]*$  {
                     BEGIN(0);
                     if(DOCS) { printf("%s", yytext); }
@@ -78,7 +82,6 @@ MUL_COM_START       [ \t]*"/*"
 
 "/*!".*"*/"   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
 "//!".*   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
-"/**/"  ;
 {MUL_COM_START} {
     BEGIN(MUL_COM);
 }

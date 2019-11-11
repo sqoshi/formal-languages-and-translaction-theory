@@ -3,26 +3,26 @@
 /** Maly przyklad programu
  *
  *  autor Maciej Gebala
- */
+*/
+
 // /*
 using namespace std;
 // */
-//
+//!Main
 int main()
 {
     /*!
     *
     *
     */
-    /*a*/
-    // Komentarz dokumentacyjny\
-    ciag dalszy jednolinijkowego komentarza\
-aaaaax
-    XDD
+/**/
+    /// Komentarz dokumentacyjny \
+    ciag dalszy jednolinijkowego komentarza \
+    aaaaax
     int i = 5;
     // Komentarz jednolinijkowy\
     i jego ciÄg dalszy\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    i dalszy */
+    i dalszy*/
     cout << "Jakis program" << endl; // ;
     // A tutaj taki komentarz \
     cout << "Poczatek komentarza /*" << endl; // ala

@@ -11,6 +11,10 @@ using namespace std;
 
 int main()
 {
+    /*!
+    *
+    *
+    */
 /**/
     /// Komentarz dokumentacyjny \
     ciag dalszy jednolinijkowego komentarza \

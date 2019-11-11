@@ -16,7 +16,7 @@ int yywrap() {
 int main() {
   extern FILE *yyin, *yyout;
 
-  yyin = fopen("test.txt", "r");
+  yyin = fopen("test.xml", "r");
   yyout = fopen("output.txt", "w");
 
   yylex();

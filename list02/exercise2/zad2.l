@@ -7,23 +7,24 @@ int yywrap();
 
 %x TAG
 %x DOIT
-
+%x CHECK
+WHITE [ \t]
 %%
-\<!--   BEGIN(DOIT);
-        <DOIT>{
-            .|\n                 ;
-            \<[^\-]*\>           {printf("%s",yytext);}
-            \-\-\>               {BEGIN(INITIAL);}
-        }
-\<!--.*[\-]{2}.*--\> {printf("%s\n",yytext);}
-
-\<      {ECHO; BEGIN(TAG);}
+\<      {ECHO;BEGIN(TAG);}
         <TAG>{
+
             ([::blank::]).*		ECHO;
             .                   ECHO;
             \n                  ECHO;
-            .>                  {ECHO; BEGIN(INITIAL);}
+            .>                  {ECHO;printf("\n");BEGIN(DOIT);}
         }
+\<!--   BEGIN(DOIT);
+                <DOIT>{
+                    \<[^\-]*\/.\>           {printf("%s\n",yytext);}
+                    .|\n                ;
+                    \-\-\>              {BEGIN(INITIAL);}
+                }
+\<!--.*[\-]{2}.*--\> {printf("%s\n",yytext);}
 
 %%
 

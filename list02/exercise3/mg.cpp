@@ -4,11 +4,10 @@
  *
  *  autor Maciej Gebala
  */
-
 // /*
 using namespace std;
 // */
-
+//
 int main()
 {
     /*!
@@ -16,9 +15,10 @@ int main()
     *
     */
 /**/
-    /// Komentarz dokumentacyjny \
-    ciag dalszy jednolinijkowego komentarza \
+    // Komentarz dokumentacyjny\
+    ciag dalszy jednolinijkowego komentarza\
     aaaaax
+    XDD
     int i = 5;
     // Komentarz jednolinijkowy\
     i jego ciÄg dalszy\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

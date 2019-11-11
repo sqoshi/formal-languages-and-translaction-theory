@@ -27,8 +27,10 @@ MUL_COM_START       [ \t]*"/*"
 {OTHER_START} {
     printf("%s", yytext);
     BEGIN(STRING);
+
 }
 <STRING>{
+    \<                                      ECHO;BEGIN(0);
     "\\\""                                  ECHO;
     \n                                      ECHO;
     "\""                                    {
@@ -36,7 +38,6 @@ MUL_COM_START       [ \t]*"/*"
                                                 BEGIN(0);
                                             }
     \>                           {printf("%s", yytext);BEGIN(0);}
-
     .                                       ECHO;
 }
 {MUL_DOC_COM_START} {
@@ -60,7 +61,6 @@ MUL_COM_START       [ \t]*"/*"
     BEGIN(ONE_DOC_COM);
     if(DOCS) { printf("%s", yytext); }
 }
-
 <ONE_DOC_COM>{
     "\\"[ \t]*\n        { if(DOCS) { printf("%s", yytext); } } ;
     .                 { if(DOCS) { printf("%s", yytext); } };
@@ -76,6 +76,7 @@ MUL_COM_START       [ \t]*"/*"
     .                    ;
     \n              { ECHO; BEGIN(0); }
 }
+
 "/*!".*"*/"   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
 "//!".*   { if(DOCS) { printf("%s", yytext); } };BEGIN(0);
 {MUL_COM_START} {

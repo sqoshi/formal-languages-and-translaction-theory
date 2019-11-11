@@ -14,10 +14,10 @@ int main()
     *
     *
     */
-/**/
+    /*a*/
     // Komentarz dokumentacyjny\
     ciag dalszy jednolinijkowego komentarza\
-    aaaaax
+aaaaax
     XDD
     int i = 5;
     // Komentarz jednolinijkowy\

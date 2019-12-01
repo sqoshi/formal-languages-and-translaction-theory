@@ -4,7 +4,7 @@
 #include <cmath>
 #include <string.h>
 
-using namespace std;
+using namespace std;//thats a big big problem
 
 int yylex(void);
 void yyerror(char *s);
@@ -16,7 +16,7 @@ bool err = false;
 %}
 
 %token ERR
-%token N_LINE 
+%token N_LINE
 %token L_BRACKET
 %token R_BRACKET
 %token NUMBER
@@ -48,23 +48,23 @@ line:   N_LINE
         | error N_LINE              ;
 ;
 
-exp:    NUMBER                      { 
+exp:    NUMBER                      {
                                         result.append(to_string($1).append(" "));
-                                        $$ = $1; 
+                                        $$ = $1;
                                     }
         | exp ADD exp               {
                                         result.append("+ ");
-                                        $$ = $1 + $3; 
+                                        $$ = $1 + $3;
                                     }
-        | exp SUB exp               { 
+        | exp SUB exp               {
                                         result.append("- ");
-                                        $$ = $1 - $3; 
+                                        $$ = $1 - $3;
                                     }
-        | exp MULT exp              { 
+        | exp MULT exp              {
                                         result.append("* ");
-                                        $$ = $1 * $3; 
+                                        $$ = $1 * $3;
                                     }
-        | exp DIV exp               {  
+        | exp DIV exp               {
                                         result.append("/ ");
                                         if($3 == 0) {
                                             err = true;
@@ -103,7 +103,7 @@ exp:    NUMBER                      {
                                     }
         | L_BRACKET exp R_BRACKET   {
                                         $$ = $2;
-                                    }                     
+                                    }
 ;
 %%
 

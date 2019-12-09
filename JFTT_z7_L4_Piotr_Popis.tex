@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[left=12mm,right=12mm,top=0.5in,bottom=0.5in]{geometry}
+\usepackage{mathtools}
+\usepackage{cancel}
+	
+\begin{document}
+\title{Zadanie 7 Lista 4}
+\author{Piotr Popis, 245162}
+\maketitle
+\centering
+
+\begin{flushleft}
+\section{Treść}
+Czy język tych słów nad alfabetem \{1,2,3,4\}, które mają tyle samo symboli 1 co 2 i tyle samo symboli 3 co 4 jest bezkontekstowy?
+\end{flushleft}
+
+\begin{flushleft}
+\section{Rozwiązanie}
+Załóżmy, że język L jest bezkontekstowy.
+Wtedy skorzystamy z lematu o pompowaniu:\\
+Istnieje stała $n$ taka, że jeśli $z$ $\epsilon$ $ L$ $\wedge$ $| z |$ $\geq$ $n$  oraz \\
+\begin{center}
+$z = uwvxy$, gdzie $|vw|$ $\geq$ $1$  $\wedge$ $|vwx|$ $\leq$ $n$
+\end{center}
+to wtedy 
+\begin{center}
+$z = uw^{i}vx^{i}y$ $\epsilon$ $L$, dla każdego $i$ $\epsilon$ $N\cup\{0\}$ 
+\end{center}
+Niech $n$ będzie dowolną liczbą naturalną.\\
+Rozważmy słowo $z$ = $1^{n}3^{n}2^{n}4^{n}$ oczywiście $z$ $\epsilon$ $L$, bo  $| z |_{1}$=$| z |_{2}$=$| z |_{3}$=$| z |_{4}$=$n$ oraz $| z |$= $4n$ $\geq$ $n$ teraz przyjmijmy, że $|v|$ = $k-1$ i rozważmy możliwe postaci $vwx$\\
+\subsection{\quad $vwx$ = $1^{+}$} 
+Dla i = 0 mamy sprzeczność, bo $|z_1|_{1}=n-k-|x| \neq n = |z_1|_{2}$, analogicznie dla pozostałych przypadków postaci $m^+$, gdzie m $\epsilon$ $\{2,3,4\}$
+
+\subsection{\quad $vwx$ = $1^{+}3^{+}$} 
+Teraz jeśli $v$ = $1^+$ to dla i = 0 $z_2$ \( \cancel{\epsilon}\) L, bo $|z_1|_{1}=n-k-|x|_1 \neq n = |z_1|_{2}$\\
+,a jeśli $v$ = $1^{+}3^{+}$ to dla i = 0 $z_3$ \( \cancel{\epsilon}\) L, bo$|z_1|_{1}=n-k-|x|_1 \neq n = |z_3|_{2}$\\
+Analogicznie dla pozostałych przypadków $vwx$ = $3^+2^+$ oraz $vwx$ = $2^+4^+$\\
+\section{Wniosek}
+\begin{center}
+Doprowadziliśmy do sprzeczności zatem L nie jest językiem bezkontekstowym.
+\end{center}
+
+\end{flushleft}
+
+\end{document}

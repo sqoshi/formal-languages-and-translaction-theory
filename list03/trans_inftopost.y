@@ -1,4 +1,5 @@
 %{
+
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -13,6 +14,7 @@ extern int yylineno;
 int errline=0;
 string result;
 bool err = false;
+
 %}
 
 %token ERR
@@ -108,7 +110,6 @@ exp:    NUMBER                      {
 %%
 
 void yyerror(char *s) {
-
     cerr << "In line " << (errline<=0 ? 0 : errline-1) << ": " << string(s) << "." << endl;
     result = "";
     return;

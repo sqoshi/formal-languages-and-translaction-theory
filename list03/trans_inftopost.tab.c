@@ -73,7 +73,7 @@
 #include <cmath>
 #include <string.h>
 
-using namespace std;
+using namespace std;//thats a big big problem
 
 int yylex(void);
 void yyerror(char *s);
@@ -1263,9 +1263,9 @@ yyreduce:
 
   case 8:
 #line 51 "trans_inftopost.y" /* yacc.c:1652  */
-    { 
+    {
                                         result.append(to_string(yyvsp[0]).append(" "));
-                                        yyval = yyvsp[0]; 
+                                        yyval = yyvsp[0];
                                     }
 #line 1271 "trans_inftopost.tab.c" /* yacc.c:1652  */
     break;
@@ -1274,32 +1274,32 @@ yyreduce:
 #line 55 "trans_inftopost.y" /* yacc.c:1652  */
     {
                                         result.append("+ ");
-                                        yyval = yyvsp[-2] + yyvsp[0]; 
+                                        yyval = yyvsp[-2] + yyvsp[0];
                                     }
 #line 1280 "trans_inftopost.tab.c" /* yacc.c:1652  */
     break;
 
   case 10:
 #line 59 "trans_inftopost.y" /* yacc.c:1652  */
-    { 
+    {
                                         result.append("- ");
-                                        yyval = yyvsp[-2] - yyvsp[0]; 
+                                        yyval = yyvsp[-2] - yyvsp[0];
                                     }
 #line 1289 "trans_inftopost.tab.c" /* yacc.c:1652  */
     break;
 
   case 11:
 #line 63 "trans_inftopost.y" /* yacc.c:1652  */
-    { 
+    {
                                         result.append("* ");
-                                        yyval = yyvsp[-2] * yyvsp[0]; 
+                                        yyval = yyvsp[-2] * yyvsp[0];
                                     }
 #line 1298 "trans_inftopost.tab.c" /* yacc.c:1652  */
     break;
 
   case 12:
 #line 67 "trans_inftopost.y" /* yacc.c:1652  */
-    {  
+    {
                                         result.append("/ ");
                                         if(yyvsp[0] == 0) {
                                             err = true;
@@ -1598,7 +1598,6 @@ yyreturn:
 
 
 void yyerror(char *s) {
-
     cerr << "In line " << (errline<=0 ? 0 : errline-1) << ": " << string(s) << "." << endl;
     result = "";
     return;
